@@ -1,0 +1,114 @@
+@base <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix wfdesc:  <http://purl.org/wf4ever/wfdesc#> .
+@prefix wfms:    <http://www.wfms.org/registry.xsd> .
+@prefix wf4ever: <http://purl.org/wf4ever/wf4ever#> .
+@prefix oa:      <http://www.w3.org/ns/oa#> .
+@prefix :        <http://w3id.org/s2rwro/md-setup/script#> .
+
+<>
+	a wfdesc:Workflow, wf4ever:Script, prov:Entity;
+	rdfs:label "setup"^^xsd:string;
+	dcterms:creator "Lucas Carvalho, Rodrigo Silveira, Munir Skaf" ;
+ 	dcterms:title "Setup of a Molecular Dynamics Simulation"^^xsd:string; 
+ 	dcterms:description "This script is used to build initial structures for a MD simulation of a protein in water, containing a glucan chain and ions​"^^xsd:string;
+ 	wfdesc:hasSubProcess <processor/split/>, <processor/constraints_definition/>;
+ 	wfdesc:hasInput <in/structure_pdb>,  <in/topology_prot>,  <in/topology_pca>;
+ 	wfdesc:hasOutput <out/fixed_1_pdb>;
+.
+
+<in/initial_structure>
+	a wfdesc:Input, wfdesc:Output;
+	rdfs:label "structure_pdb"^^xsd:string;
+ 	dcterms:title "crystal ​structure​ of the protein"^^xsd:string;
+.
+
+<in/topology_prot>
+	a wfdesc:Input, wfdesc:Output;
+	rdfs:label "topology_prot"^^xsd:string;
+ 	dcterms:title "topology file for protein​s"^^xsd:string;
+.
+
+<in/topology_pca>
+	a wfdesc:Input, wfdesc:Output;
+	rdfs:label "topology_pca"^^xsd:string;
+ 	dcterms:title "topology file for ​the non-standard residue PCA"^^xsd:string;
+.
+
+<in/fixed_1_pdb>
+	a wfdesc:Output, wfdesc:Input;
+	rdfs:label "fixed_1"^^xsd:string;
+ 	dcterms:title "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​"^^xsd:string;
+.
+
+<datalink?from=in/initial_structure&to=processor/split/in/initial_structure>     
+   a wfdesc:DataLink;
+   wfdesc:hasSource <in/initial_structure>;
+   wfdesc:hasSink <processor/split/in/initial_structure> .
+
+
+<processor/split/>
+	a wfdesc:Process, prov:Entity;
+	rdfs:label "split"^^xsd:string;
+ 	dcterms:title "the file structure.pdb is split into different parts. Each part represent a subsystem.​"^^xsd:string;
+ 	wfdesc:hasInput <processor/split/in/initial_structure>;
+ 	wfdesc:hasOutput <processor/split/out/cbh1_pdb>;
+ 	prov:wasDerivedFrom [  	 
+                          a prov:Entity, oa:TextPositionSelector;  
+					                oa:start "1644"^^xsd:Integer;
+  					              oa:end "1786"^^xsd:Integer;
+			                ];
+.
+
+<processor/split/in/initial_structure>
+	a wfdesc:Input;
+	rdfs:label "structure_pdb"^^xsd:string;
+	dcterms:title "crystal ​structure​ of the protein"^^xsd:string;
+.
+
+<processor/split/out/cbh1_pdb>
+	a wfdesc:Output ;
+	rdfs:label "cbh1_pdb"^^xsd:string;
+ 	dcterms:title "coordinates of the protein atoms"^^xsd:string;
+.
+
+<datalink?from=processor/split/out/cbh1_pdb&to=processor/constraints_definition/in/cbh1_pdb>
+   a wfdesc:DataLink;
+   wfdesc:hasSource <processor/split/out/cbh1_pdb>;
+   wfdesc:hasSink <processor/constraints_definition/in/cbh1_pdb> 
+.
+
+<processor/constraints_definition/>
+  	a wfdesc:Process, prov:Entity;
+  	rdfs:label "constraints_definition"^^xsd:string;
+  	dcterms:title "We define the atoms that should be kept fixed in the equilibration steps of the MD simulations.​"^^xsd:string;
+  	wfdesc:hasInput <processor/constraints_definition/in/cbh1_pdb>;
+  	wfdesc:hasOutput <processor/constraints_definition/out/fixed_1_pdb>;
+  	prov:wasDerivedFrom 	[    
+	                          a prov:Entity, oa:TextPositionSelector;  
+	                          oa:start "6617"^^xsd:Integer;
+	                          oa:end "7020"^^xsd:Integer;
+                      		];
+.
+
+<processor/constraints_definition/in/cbh1_pdb>
+  	a wfdesc:Input;
+  	rdfs:label "cbh1_pdb"^^xsd:string;
+  	dcterms:title "initial coordinates for the simulations, containing protein, water, ions and glucan chain​"^^xsd:string;
+.
+
+<processor/constraints_definition/out/fixed_1_pdb>
+  	a wfdesc:Output;
+  	rdfs:label "fixed_1_pdb"^^xsd:string;
+  	dcterms:title "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​"^^xsd:string;
+.
+
+<datalink?from=processor/constraints_definition/out/fixed_1_pdb&to=out/fixed_1_pdb>
+   a wfdesc:DataLink;
+   wfdesc:hasSource <processor/constraints_definition/out/fixed_1_pdb>;
+   wfdesc:hasSink <out/fixed_1_pdb> 
+.

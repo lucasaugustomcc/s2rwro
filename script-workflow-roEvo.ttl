@@ -1,0 +1,175 @@
+@base <http://w3id.org/s2rwro/md-setup/> .
+@prefix wro: <http://purl.org/wf4ever/ro#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix roevo: <http://purl.org/wf4ever/roevo#> .
+@prefix wfdesc: <http://purl.org/wf4ever/wfdesc#> .
+@prefix wf4ever: <http://purl.org/wf4ever/wf4ever#> .
+@prefix pav: <http://purl.org/pav/> .
+<https://plus.google.com/+LucasAugustoCarvalho> a prov:Agent ;
+	foaf:name "Lucas Carvalho" .
+
+## RO level changes
+<http://w3id.org/s2rwro/md-setup/snapshot-1/> a wro:ResearchObject , roevo:SnapshotRO ;
+roevo:isSnapshotOf <http://w3id.org/s2rwro/md-setup/> ;
+roevo:snapshotedAtTime "2016-06-21T13:18:29.578+01:00" ;
+roevo:wasSnapshotedBy <https://plus.google.com/+LucasAugustoCarvalho> ;
+.
+
+<http://w3id.org/s2rwro/md-setup/snapshot-2/> a wro:ResearchObject , roevo:SnapshotRO ;
+roevo:isSnapshotOf <http://w3id.org/s2rwro/md-setup/> ;
+roevo:snapshotedAtTime "2016-06-21T13:18:29.578+01:00" ;
+roevo:wasSnapshotedBy <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:wasChangedBy <change_specifications/changes-ro-1> ;
+prov:wasRevisionOf <http://w3id.org/s2rwro/md-setup/snapshot-1/> 
+.
+
+<http://w3id.org/s2rwro/md-setup/snapshot-3/> a wro:ResearchObject , roevo:SnapshotRO ;
+roevo:isSnapshotOf <http://w3id.org/s2rwro/md-setup/> ;
+roevo:snapshotedAtTime "2016-06-21T13:18:29.578+01:00" ;
+roevo:wasSnapshotedBy <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:wasChangedBy <change_specifications/changes-ro-2> ;
+prov:wasRevisionOf <http://w3id.org/s2rwro/md-setup/snapshot-2/> 
+.
+
+<change_specifications/changes-ro-1> a  roevo:ChangeSpecification ;
+roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/> ;
+roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/> ;
+prov:wasAssociatedWith <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:hasChange <change_specifications/changes-ro-1/changes/change-1>
+.
+
+<change_specifications/changes-ro-2> a  roevo:ChangeSpecification ;
+roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/> ;
+roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-3/> ;
+prov:wasAssociatedWith <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:hasChange <change_specifications/changes-ro-2/changes/change-1>
+.
+
+<change_specifications/changes-ro-1/changes/change-1> a roevo:Change , roevo:Addition ;
+roevo:relatedResource <http://w3id.org/s2rwro/md-setup/workflow/executable-workflow.t2flow> 
+.
+
+<change_specifications/changes-ro-2/changes/change-1> a roevo:Change , roevo:Addition ;
+roevo:relatedResource <http://w3id.org/s2rwro/md-setup/workflow/refined-workflow.t2flow> 
+.
+
+## Workflow level changes
+<http://w3id.org/s2rwro/md-setup/script/build.sh> a wro:Resource , wf4ever:Script, wfdesc:Workflow ;
+prov:generatedAtTime "2014-02-24T21:15:29.578+01:00" ;
+prov:wasAttributedTo <https://plus.google.com/+LucasAugustoCarvalho> 
+.
+
+<http://w3id.org/s2rwro/md-setup/workflow/executable-workflow.t2flow> a wro:Resource , wfdesc:Workflow ;
+prov:generatedAtTime "2014-02-24T21:15:29.578+01:00" ;
+prov:wasAttributedTo <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:wasChangedBy <change_specifications/changes-wf-1> ;
+prov:wasRevisionOf <http://w3id.org/s2rwro/md-setup/script/build.sh> 
+.
+
+<http://w3id.org/s2rwro/md-setup/workflow/refined-workflow.t2flow> a wro:Resource , wfdesc:Workflow ;
+prov:generatedAtTime "2014-02-24T21:15:29.578+01:00" ;
+prov:wasAttributedTo <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:wasChangedBy <change_specifications/changes-wf-2> ;
+prov:wasRevisionOf <http://w3id.org/s2rwro/md-setup/workflow/executable-workflow.t2flow> 
+.
+
+<change_specifications/changes-wf-1> a roevo:ChangeSpecification ;
+roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/script/build.sh> ;
+roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> ;
+prov:wasAssociatedWith <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:hasChange 
+<change_specifications/changes-wf-1/changes/change-1>
+.
+
+<change_specifications/changes-wf-1> a roevo:ChangeSpecification ;
+roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> ;
+roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-3/workflow/refined-workflow.t2flow> ;
+prov:wasAssociatedWith <https://plus.google.com/+LucasAugustoCarvalho> ;
+roevo:hasChange 
+<change_specifications/changes-wf-2/changes/change-1>,
+<change_specifications/changes-wf-2/changes/change-2>,
+<change_specifications/changes-wf-2/changes/change-3>,
+<change_specifications/changes-wf-2/changes/change-4>,
+<change_specifications/changes-wf-2/changes/change-5>
+.
+
+<change_specifications/changes-wf-1/changes/change-1> a roevo:Change , roevo:Modification ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/processor/split/> 
+.
+
+<change_specifications/changes-wf-2/changes/change-1> a roevo:Change , roevo:Removal ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/in/initial_structure>
+.
+
+<change_specifications/changes-wf-2/changes/change-2> a roevo:Change , roevo:Removal ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-1> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/datalink?from=in/initial_structure&to=processor/split/in/initial_structure>
+.
+
+<change_specifications/changes-wf-2/changes/change-3> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-2> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/processor/Fetch_PDB_flatfile_from_RCSB_server/>
+.
+
+<change_specifications/changes-wf-2/changes/change-4> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-3> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=in/pdbID&to=processor/REST_Service/in/id>
+.
+
+<change_specifications/changes-wf-2/changes/change-5> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-4> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/>
+.
+
+<change_specifications/changes-wf-2/changes/change-6> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-5> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=processor/REST_Service/out/responseBody&to=out/pdbFlatFile>
+.
+
+<change_specifications/changes-wf-2/changes/change-7> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/changes-wf-2/changes/change-6> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=in/pdbID&to=processor/REST_Service/in/id>
+.
+
+
+## Resources
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/processor/split/> 
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/in/initial_structure>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/datalink?from=in/initial_structure&to=processor/split/in/initial_structure>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/processor/Fetch_PDB_flatfile_from_RCSB_server/>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=in/pdbID&to=processor/REST_Service/in/id>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=processor/REST_Service/out/responseBody&to=out/pdbFlatFile>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/>
+a wro:Resource .
+
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Fetch_PDB_flatfile_from_RCSB_server/datalink?from=in/pdbID&to=processor/REST_Service/in/id>
+a wro:Resource .
+
+## Link between t2flow workflow and taverna workflow id
+## Old workflow
+<http://ns.taverna.org.uk/2010/workflowBundle/32626c21-da0e-4aeb-ac93-8727122a1293/workflow/Setup_of_a_Molecular/>
+wfdesc:hasWorkflowDefinition 
+<http://w3id.org/s2rwro/md-setup/workflow/executable-workflow.t2flow> .
+
+## script
+<http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/>
+wfdesc:hasWorkflowDefinition
+<http://w3id.org/s2rwro/md-setup/script/build.sh> .
+
+## New workflow
+<http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/>
+wfdesc:hasWorkflowDefinition
+<http://w3id.org/s2rwro/md-setup/workflow/refined-workflow.t2flow> .

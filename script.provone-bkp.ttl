@@ -1,0 +1,135 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix provone: <http://purl.org/provone> .
+@prefix wfms:    <http://www.wfms.org/registry.xsd> .
+@prefix :        <http://w3id.org/s2rwro/md-setup#> .
+
+:workflow
+	a provone:Workflow, wf4ever:Script, prov:Entity;
+	dcterms:identifier "setup"^^xsd:string;
+ 	dcterms:title "Setup of a Molecular Dynamics Simulation"^^xsd:string; 
+ 	dcterms:description "This script is used to build initial structures for a MD simulation of a protein in water, containing a glucan chain and ions​"^^xsd:string;
+ 	provone:hasSubProcess :split, :constraints_definition;
+ 	provone:hasInput :structure_pdb_input_workflow, :topology_prot_input_workflow, :topology_pca_input_workflow;
+ 	provone:hasOutput :fixed_1_pdb_output_workflow;
+.
+
+:structure_pdb_input_workflow
+	a provone:InputPort;
+	dcterms:identifier "structure_pdb"^^xsd:string;
+ 	dcterms:title "crystal ​structure​ of the protein"^^xsd:string;
+.
+
+:topology_prot_input_workflow
+	a provone:InputPort;
+	dcterms:identifier "topology_prot"^^xsd:string;
+ 	dcterms:title "topology file for protein​s"^^xsd:string;
+.
+
+:topology_pca_input_workflow
+	a provone:InputPort;
+	dcterms:identifier "topology_pca"^^xsd:string;
+ 	dcterms:title "topology file for ​the non-standard residue PCA"^^xsd:string;
+.
+
+:fixed_1_pdb_output_workflow
+	a provone:OutputPort;
+	dcterms:identifier "fixed_1"^^xsd:string;
+ 	dcterms:title "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​"^^xsd:string;
+.
+
+:DL1_workflow_split     
+   a provone:DataLink;
+   dcterms:identifier "e1_e2DL"^^xsd:string;
+.
+
+:structure_pdb_input_workflow provone:inPortToDL :DL1_workflow_split .
+
+:DL1_workflow_split provone:DLToInPort :structure_pdb_input_split .
+
+:p2_p3DL     
+   a provone:DataLink;
+   dcterms:identifier "e1_e2DL"^^xsd:string;
+.
+
+:structure_pdb provone:inPortToDL :p2_p3DL .
+
+:p2_p3DL provone:DLToInPort :structure_pdb .
+
+:split
+	a provone:Process, a prov:Entity;
+	dcterms:identifier "split"^^xsd:string;
+ 	dcterms:title "the file structure.pdb is split into different parts. Each part represent a subsystem.​"^^xsd:string;
+ 	provone:hasInput :structure_pdb_input_split;
+ 	provone:hasOutput :protein_pdb_split, :bglc_pdb_split, :water_pdb_split, :cal_pdb_split;
+ 	prov:wasDerivedFrom [  	 
+                          a oa:TextPositionSelector;  
+      					          oa:start "1644"^^xsd:Integer;
+      					          oa:end "1786"^^xsd:Integer;
+      					          a prov:Entity
+  					          .
+					            ];
+.
+
+:protein_pdb
+	a provone:OutputPort;
+	dcterms:identifier "protein_pdb"^^xsd:string;
+ 	dcterms:title "coordinates of the protein atoms"^^xsd:string;
+.
+
+:bglc_pdb
+	a provone:OutputPort;
+	dcterms:identifier "bglc_pdb"^^xsd:string;
+   	dcterms:title "coordinates of the glucan chain present in the crystal structure"^^xsd:string;
+.
+
+:water_pdb
+	a provone:OutputPort;
+	dcterms:identifier "water_pdb"^^xsd:string;
+ 	dcterms:title "coordinates of water molecules present in the crystal structure"^^xsd:string;
+.
+
+:cal_pdb
+	a provone:OutputPort;
+	dcterms:identifier "cal_pdb"^^xsd:string;
+ 	dcterms:title "coordinates of calcium ions present in the crystal structure"^^xsd:string;
+.
+
+:constraints_definition
+  a provone:Process, a prov:Entity;
+  dcterms:identifier "constraints_definition"^^xsd:string;
+  dcterms:title "We define the atoms that should be kept fixed in the equilibration steps of the MD simulations.​"^^xsd:string;
+  provone:hasInput :cbh1_pdb;
+  provone:hasOutput :fixed_1_pdb;
+  prov:wasDerivedFrom [    
+                          a oa:TextPositionSelector;  
+                          oa:start "6617"^^xsd:Integer;
+                          oa:end "7020"^^xsd:Integer;
+                          a prov:Entity
+                      .
+                      ];
+.
+
+:cbh1_pdb_input_constraints_definition
+  a provone:InputPort;
+  dcterms:identifier "cbh1_pdb"^^xsd:string;
+  dcterms:title "initial coordinates for the simulations, containing protein, water, ions and glucan chain​"^^xsd:string;
+.
+
+:fixed_1_pdb_output_constraints_definition
+  a provone:OutputPort;
+  dcterms:identifier "fixed_1_pdb"^^xsd:string;
+  dcterms:title "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​"^^xsd:string;
+.
+
+:DL1_constraints_definition_workflow 
+   a provone:DataLink;
+   dcterms:identifier "e1_e2DL"^^xsd:string;
+.
+
+:fixed_1_pdb_output_constraints_definition provone:outPortToDL :DL1_constraints_definition_workflow .
+
+:DL1_constraints_definition_workflow provone:DLToOutPort :fixed_1_pdb_output_workflow .

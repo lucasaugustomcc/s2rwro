@@ -1,0 +1,16 @@
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX prov:    <http://www.w3.org/ns/prov#>
+PREFIX provone: <http://purl.org/provone>
+PREFIX wfms:    <http://www.wfms.org/registry.xsd>
+PREFIX wf4ever: <http://purl.org/wf4ever/wf4ever#>
+PREFIX oa:      <http://www.w3.org/ns/oa#>
+PREFIX :        <http://w3id.org/s2rwro/md-setup#>
+
+select ?workflow ?process ?derivation where {
+?workflow a provone:Workflow .
+?workflow provone:hasSubProcess ?process.
+?process prov:wasDerivedFrom ?derivation
+} LIMIT 100

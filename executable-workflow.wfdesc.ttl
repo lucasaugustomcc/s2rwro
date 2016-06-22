@@ -1,0 +1,226 @@
+@base <http://ns.taverna.org.uk/2010/workflowBundle/32626c21-da0e-4aeb-ac93-8727122a1293/workflow/Setup_of_a_Molecular/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wfdesc: <http://purl.org/wf4ever/wfdesc#> .
+@prefix wf4ever: <http://purl.org/wf4ever/wf4ever#> .
+@prefix roterms: <http://purl.org/wf4ever/roterms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix comp: <http://purl.org/DP/components#> .
+@prefix dep: <http://scape.keep.pt/vocab/dependencies#> .
+@prefix biocat: <http://biocatalogue.org/attribute/> .
+@prefix : <#> .
+
+<processor/constraints_definition/> a wfdesc:Process , wfdesc:Description , owl:Thing , wf4ever:CommandLineTool ;
+	dcterms:description "We define the atoms that should be kept fixed in the equilibration steps of the MD simulations.​" ;
+	rdfs:label "constraints_definition" ;
+	wfdesc:hasInput <processor/constraints_definition/in/cbh1_pdb> , <processor/constraints_definition/in/cbh1_psf> ;
+	wfdesc:hasOutput <processor/constraints_definition/out/fixed_1_pdb> , <processor/constraints_definition/out/fixed_2_pdb> .
+
+<processor/ionize/> a wfdesc:Process , wfdesc:Description , owl:Thing , wf4ever:CommandLineTool ;
+	dcterms:description "With the program autoionize, introduce ions to neutralize the system.​" ;
+	rdfs:label "ionize" ;
+	wfdesc:hasInput <processor/ionize/in/wbox_pdb> , <processor/ionize/in/wbox_psf> ;
+	wfdesc:hasOutput <processor/ionize/out/cbh1_pdb> , <processor/ionize/out/cbh1_psf> .
+
+<processor/psgen/> a wfdesc:Process , wfdesc:Description , owl:Thing , wf4ever:CommandLineTool ;
+	dcterms:description "Starting the program psfgen​. This program takes the 4 files above, and assign force field parameters (charges, bonds etc) for the system." ;
+	rdfs:label "psgen" ;
+	wfdesc:hasInput <processor/psgen/in/bglc_pdb> , <processor/psgen/in/cal_pdb> , <processor/psgen/in/protein_pdb> , <processor/psgen/in/topology_carb> , <processor/psgen/in/topology_pca> , <processor/psgen/in/topology_prot> , <processor/psgen/in/water_pdb> ;
+	wfdesc:hasOutput <processor/psgen/out/hyd_pdb> , <processor/psgen/out/hyd_psf> .
+
+<processor/solvate/> a wfdesc:Process , wfdesc:Description , owl:Thing , wf4ever:CommandLineTool ;
+	dcterms:description "Using the program solvate​ ​to imerse the system in a water box.​" ;
+	rdfs:label "solvate" ;
+	wfdesc:hasInput <processor/solvate/in/hyd_pdb> , <processor/solvate/in/hyd_psf> ;
+	wfdesc:hasOutput <processor/solvate/out/wbox_pdb> , <processor/solvate/out/wbox_psf> .
+
+<processor/split/> a wfdesc:Process , wfdesc:Description , owl:Thing , wf4ever:CommandLineTool ;
+	dcterms:description "the file structure.pdb is split into different parts. Each part represent a subsystem.​" ;
+	rdfs:label "split" ;
+	wfdesc:hasInput <processor/split/in/initial_structure> ;
+	wfdesc:hasOutput <processor/split/out/bglc_pdb> , <processor/split/out/cal_pdb> , <processor/split/out/protein_pdb> , <processor/split/out/water_pdb> .
+
+<datalink?from=in/initial_structure&to=processor/split/in/initial_structure> a wfdesc:DataLink ;
+	wfdesc:hasSource <in/initial_structure> ;
+	wfdesc:hasSink <processor/split/in/initial_structure> .
+
+<datalink?from=in/topology_carb&to=processor/psgen/in/topology_carb> a wfdesc:DataLink ;
+	wfdesc:hasSource <in/topology_carb> ;
+	wfdesc:hasSink <processor/psgen/in/topology_carb> .
+
+<datalink?from=in/topology_pca&to=processor/psgen/in/topology_pca> a wfdesc:DataLink ;
+	wfdesc:hasSource <in/topology_pca> ;
+	wfdesc:hasSink <processor/psgen/in/topology_pca> .
+
+<datalink?from=in/topology_prot&to=processor/psgen/in/topology_prot> a wfdesc:DataLink ;
+	wfdesc:hasSource <in/topology_prot> ;
+	wfdesc:hasSink <processor/psgen/in/topology_prot> .
+
+<datalink?from=processor/constraints_definition/out/fixed_1_pdb&to=out/final_structure_1> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/constraints_definition/out/fixed_1_pdb> ;
+	wfdesc:hasSink <out/final_structure_1> .
+
+<datalink?from=processor/constraints_definition/out/fixed_2_pdb&to=out/final_structure_2> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/constraints_definition/out/fixed_2_pdb> ;
+	wfdesc:hasSink <out/final_structure_2> .
+
+<datalink?from=processor/ionize/out/cbh1_pdb&to=processor/constraints_definition/in/cbh1_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/ionize/out/cbh1_pdb> ;
+	wfdesc:hasSink <processor/constraints_definition/in/cbh1_pdb> .
+
+<datalink?from=processor/ionize/out/cbh1_psf&to=processor/constraints_definition/in/cbh1_psf> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/ionize/out/cbh1_psf> ;
+	wfdesc:hasSink <processor/constraints_definition/in/cbh1_psf> .
+
+<datalink?from=processor/psgen/out/hyd_pdb&to=processor/solvate/in/hyd_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/psgen/out/hyd_pdb> ;
+	wfdesc:hasSink <processor/solvate/in/hyd_pdb> .
+
+<datalink?from=processor/psgen/out/hyd_psf&to=processor/solvate/in/hyd_psf> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/psgen/out/hyd_psf> ;
+	wfdesc:hasSink <processor/solvate/in/hyd_psf> .
+
+<datalink?from=processor/solvate/out/wbox_pdb&to=processor/ionize/in/wbox_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/solvate/out/wbox_pdb> ;
+	wfdesc:hasSink <processor/ionize/in/wbox_pdb> .
+
+<datalink?from=processor/solvate/out/wbox_psf&to=processor/ionize/in/wbox_psf> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/solvate/out/wbox_psf> ;
+	wfdesc:hasSink <processor/ionize/in/wbox_psf> .
+
+<datalink?from=processor/split/out/bglc_pdb&to=processor/psgen/in/bglc_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/split/out/bglc_pdb> ;
+	wfdesc:hasSink <processor/psgen/in/bglc_pdb> .
+
+<datalink?from=processor/split/out/cal_pdb&to=processor/psgen/in/cal_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/split/out/cal_pdb> ;
+	wfdesc:hasSink <processor/psgen/in/cal_pdb> .
+
+<datalink?from=processor/split/out/protein_pdb&to=processor/psgen/in/protein_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/split/out/protein_pdb> ;
+	wfdesc:hasSink <processor/psgen/in/protein_pdb> .
+
+<datalink?from=processor/split/out/water_pdb&to=processor/psgen/in/water_pdb> a wfdesc:DataLink ;
+	wfdesc:hasSource <processor/split/out/water_pdb> ;
+	wfdesc:hasSink <processor/psgen/in/water_pdb> .
+
+<> a wfdesc:Workflow , wfdesc:Description , wfdesc:Process ;
+	dcterms:description "This script is used to build initial structures for a MD simulation of a protein in water, containing a glucan chain and ions​" ;
+	dc:creator """Workflow's author: Lucas Carvalho
+Script's Author: Rodrigo Slveira
+
+Acknoledgments: Caroline Simões and Munir Skaf""" ;
+	dcterms:title "Setup of a Molecular Dynamics Simulation" ;
+	rdfs:label "Setup_of_a_Molecular" ;
+	wfdesc:hasInput <in/initial_structure> , <in/topology_carb> , <in/topology_pca> , <in/topology_prot> ;
+	wfdesc:hasOutput <out/final_structure_1> , <out/final_structure_2> ;
+	wfdesc:hasSubProcess <processor/constraints_definition/> , <processor/ionize/> , <processor/psgen/> , <processor/solvate/> , <processor/split/> ;
+	wfdesc:hasDataLink <datalink?from=processor/constraints_definition/out/fixed_1_pdb&to=out/final_structure_1> , <datalink?from=processor/constraints_definition/out/fixed_2_pdb&to=out/final_structure_2> , <datalink?from=processor/ionize/out/cbh1_pdb&to=processor/constraints_definition/in/cbh1_pdb> , <datalink?from=processor/ionize/out/cbh1_psf&to=processor/constraints_definition/in/cbh1_psf> , <datalink?from=processor/psgen/out/hyd_pdb&to=processor/solvate/in/hyd_pdb> , <datalink?from=processor/psgen/out/hyd_psf&to=processor/solvate/in/hyd_psf> , <datalink?from=processor/solvate/out/wbox_pdb&to=processor/ionize/in/wbox_pdb> , <datalink?from=processor/solvate/out/wbox_psf&to=processor/ionize/in/wbox_psf> , <datalink?from=processor/split/out/bglc_pdb&to=processor/psgen/in/bglc_pdb> , <datalink?from=processor/split/out/cal_pdb&to=processor/psgen/in/cal_pdb> , <datalink?from=processor/split/out/protein_pdb&to=processor/psgen/in/protein_pdb> , <datalink?from=processor/split/out/water_pdb&to=processor/psgen/in/water_pdb> , <datalink?from=in/initial_structure&to=processor/split/in/initial_structure> , <datalink?from=in/topology_carb&to=processor/psgen/in/topology_carb> , <datalink?from=in/topology_pca&to=processor/psgen/in/topology_pca> , <datalink?from=in/topology_prot&to=processor/psgen/in/topology_prot> .
+
+<in/initial_structure> a wfdesc:Input , wfdesc:Description , wfdesc:Output ;
+	biocat:exampleData "build/structure.pdb" ;
+	dcterms:description "crystal ​structure​ of the protein" ;
+	rdfs:label "initial_structure" .
+
+<in/topology_carb> a wfdesc:Input , wfdesc:Description , wfdesc:Output ;
+	biocat:exampleData "toppar/top_all36_carb.rtf" ;
+	dcterms:description "topology file for carbohydrates" ;
+	rdfs:label "topology_carb" .
+
+<in/topology_pca> a wfdesc:Input , wfdesc:Description , wfdesc:Output ;
+	dcterms:description "topology file for ​the non-standard residue PCA" ;
+	biocat:exampleData "toppar/pca.rtf" ;
+	rdfs:label "topology_pca" .
+
+<in/topology_prot> a wfdesc:Input , wfdesc:Description , wfdesc:Output ;
+	dcterms:description "topology file for protein​s" ;
+	biocat:exampleData "toppar/top_all22_prot.rtf" ;
+	rdfs:label "topology_prot" .
+
+<out/final_structure_1> a wfdesc:Output , wfdesc:Description , wfdesc:Input ;
+	dcterms:description "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​" ;
+	rdfs:label "final_structure_1" .
+
+<out/final_structure_2> a wfdesc:Output , wfdesc:Description , wfdesc:Input ;
+	rdfs:label "final_structure_2" .
+
+<processor/constraints_definition/in/cbh1_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "cbh1_pdb" .
+
+<processor/constraints_definition/in/cbh1_psf> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "cbh1_psf" .
+
+<processor/constraints_definition/out/fixed_1_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "fixed_1_pdb" .
+
+<processor/constraints_definition/out/fixed_2_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "fixed_2_pdb" .
+
+<processor/ionize/in/wbox_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "wbox_pdb" .
+
+<processor/ionize/in/wbox_psf> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "wbox_psf" .
+
+<processor/ionize/out/cbh1_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "cbh1_pdb" .
+
+<processor/ionize/out/cbh1_psf> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "cbh1_psf" .
+
+<processor/psgen/in/bglc_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "bglc_pdb" .
+
+<processor/psgen/in/cal_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "cal_pdb" .
+
+<processor/psgen/in/protein_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "protein_pdb" .
+
+<processor/psgen/in/topology_carb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "topology_carb" .
+
+<processor/psgen/in/topology_pca> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "topology_pca" .
+
+<processor/psgen/in/topology_prot> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "topology_prot" .
+
+<processor/psgen/in/water_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "water_pdb" .
+
+<processor/psgen/out/hyd_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "hyd_pdb" .
+
+<processor/psgen/out/hyd_psf> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "hyd_psf" .
+
+<processor/solvate/in/hyd_pdb> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "hyd_pdb" .
+
+<processor/solvate/in/hyd_psf> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "hyd_psf" .
+
+<processor/solvate/out/wbox_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "wbox_pdb" .
+
+<processor/solvate/out/wbox_psf> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "wbox_psf" .
+
+<processor/split/in/initial_structure> a wfdesc:Input , wfdesc:Description ;
+	rdfs:label "initial_structure" .
+
+<processor/split/out/bglc_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "bglc_pdb" .
+
+<processor/split/out/cal_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "cal_pdb" .
+
+<processor/split/out/protein_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "protein_pdb" .
+
+<processor/split/out/water_pdb> a wfdesc:Output , wfdesc:Description ;
+	rdfs:label "water_pdb" .

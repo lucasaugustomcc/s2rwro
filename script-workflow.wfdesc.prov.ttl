@@ -1,0 +1,36 @@
+@base <http://ns.taverna.org.uk/2010/workflowBundle/32626c21-da0e-4aeb-ac93-8727122a1293/workflow/Setup_of_a_Molecular/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+<http://w3id.org/s2rwro/md-setup/provenance/script-workflow.wfdesc.prov.ttl> a prov:Bundle;
+    prov:wasGeneratedAt "2016-06-21T13:18:29.578+01:00";
+    prov:wasAttributedTo <https://plus.google.com/+LucasAugustoCarvalho>
+.
+
+<> a prov:Entity;
+    prov:hadPrimarySource <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/>
+.
+
+<in/initial_structure>
+    a prov:Entity;
+    prov:wasDerivedFrom <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/in/structure_pdb>
+.
+
+<out/final_structure_1>
+    a prov:Entity;
+    prov:wasDerivedFrom <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/out/final_structure_1>
+.      
+
+<processor/split/> 
+    a prov:Entity;
+    prov:wasDerivedFrom <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/processor/split/>
+.
+
+<processor/split/in/initial_structure> 
+    a prov:Entity;
+    prov:wasDerivedFrom <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/processor/split/in/structure_pdb>
+.
+
+<datalink?from=in/initial_structure&to=processor/split/in/initial_structure> 
+    a prov:Entity;
+    prov:wasDerivedFrom <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/datalink?from=in/structure_pdb&to=processor/split/in/structure_pdb>
+.

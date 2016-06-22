@@ -1,0 +1,105 @@
+@prefix wro: <http://purl.org/wf4ever/ro#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix roevo: <http://purl.org/wf4ever/roevo#> .
+@prefix wfdesc: <http://purl.org/wf4ever/wfdesc#> .
+@prefix pav: <http://purl.org/pav/> .
+<https://www.google.com/accounts/o8/id?id=AItOawl_w_9JVAQsyNOviIgiYNzPYAGPNYlvVe4> a prov:Agent ;
+	foaf:name "Eleni Mina" .
+
+## RO level changes
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/> a wro:ResearchObject , roevo:SnapshotRO ;
+roevo:isSnapshotOf <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2/> ;
+roevo:snapshotedAtTime "2014-02-26T19:18:29.578+01:00" ;
+roevo:wasSnapshotedBy <https://www.google.com/accounts/o8/id?id=AItOawl_w_9JVAQsyNOviIgiYNzPYAGPNYlvVe4> ;
+roevo:wasChangedBy <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da> ;
+prov:wasRevisionOf <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da> a  roevo:ChangeSpecification ;
+roevo:fromVersion <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/> ;
+roevo:toVersion <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/> ;
+prov:wasAssociatedWith <https://www.google.com/accounts/o8/id?id=AItOawl_w_9JVAQsyNOviIgiYNzPYAGPNYlvVe4> ;
+roevo:hasChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-ff0f5238c6fc> ,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-e457e0ebe4a8> ,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-0b2cdd218b20> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-ff0f5238c6fc> a roevo:Change , roevo:Removal ;
+roevo:relatedResource <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/annotate_genes_biological_processes.t2flow> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-e457e0ebe4a8> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-ff0f5238c6fc> ;
+roevo:relatedResource <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/annotate_genes_biological_processes_xpath_cpids.t2flow> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-0b2cdd218b20> a roevo:Modification , roevo:Change ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-e457e0ebe4a8> ;
+roevo:relatedResource <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/workflow_sketch_hd_chromatin_interpretation.png> .
+
+## Workflow level changes
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/annotate_genes_biological_processes_xpath_cpids.t2flow> a wro:Resource , wfdesc:Workflow ;
+prov:generatedAtTime "2014-02-24T21:15:29.578+01:00" ;
+prov:wasAttributedTo <https://www.google.com/accounts/o8/id?id=AItOawl_w_9JVAQsyNOviIgiYNzPYAGPNYlvVe4> ;
+roevo:wasChangedBy <change_specifications/59d8e3d7-db05-4bc3-b689-123456789abc> ;
+prov:wasRevisionOf <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/
+annotate_genes_biological_processes.t2flow> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-123456789abc> a roevo:ChangeSpecification ;
+roevo:fromVersion <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/annotate_genes_biological_processes.t2flow> ;
+roevo:toVersion <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/annotate_genes_biological_processes_xpath_cpids.t2flow> ;
+prov:wasAssociatedWith <https://www.google.com/accounts/o8/id?id=AItOawl_w_9JVAQsyNOviIgiYNzPYAGPNYlvVe4> ;
+roevo:hasChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-abc111def111>,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-0987654321ab>,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rstuvpxyz123>,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-x34p28muy321>,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rast25987hm2>,
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-kdisia984727>.
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-abc111def111> a roevo:Change , roevo:Removal ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/datalink?from=processor/get_scores/out/nodelist&to=processor/Merge_String_List_to_a_String_4/in/stringlist> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-0987654321ab> a roevo:Change , roevo:Removal ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/8c6ff8a3-8031-4828-b03a-abc111def111> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/datalink?from=processor/Merge_String_List_to_a_String_4/out/concatenated&to=out/score> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rstuvpxyz123> a roevo:Change , roevo:Removal ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/7355d3be-6506-4f38-a3bb-0987654321ab> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/processor/Merge_String_List_to_a_String_4/> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-x34p28muy321> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rstuvpxyz123> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/processor/Merge_String_List_to_a_String_5/> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rast25987hm2> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-x34p28muy321> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/datalink?from=processor/Merge_String_List_to_a_String_5/out/concatenated&to=out/score> .
+
+<change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-kdisia984727> a roevo:Change , roevo:Addition ;
+roevo:hasPreviousChange <change_specifications/59d8e3d7-db05-4bc3-b689-7bca7733f7da/changes/f9e0164e-9e7a-4bad-b44c-rast25987hm2> ;
+roevo:relatedResource <http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/datalink?from=processor/get_scores/out/nodelist&to=processor/Merge_String_List_to_a_String_5/in/stringlist> .
+
+## Resources
+<http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/datalink?from=processor/get_scores/out/nodelist&to=processor/Merge_String_List_to_a_String_4/in/stringlist> a wro:Resource .
+<http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/datalink?from=processor/Merge_String_List_to_a_String_4/out/concatenated&to=out/score>
+a wro:Resource .
+<http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/processor/Merge_String_List_to_a_String_4/>
+a wro:Resource .
+<http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/processor/Merge_String_List_to_a_String_5/>
+a wro:Resource .
+<http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/datalink?from=processor/Merge_String_List_to_a_String_5/out/concatenated&to=out/score>
+a wro:Resource .
+<http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/datalink?from=processor/get_scores/out/nodelist&to=processor/Merge_String_List_to_a_String_5/in/stringlist>
+a wro:Resource .
+
+## Link between t2flow workflow and taverna workflow id
+## Old workflow
+<http://ns.taverna.org.uk/2010/workflowBundle/60a0cc53-cd8d-443f-b303-51c2773b0de8/workflow/Annotate_gene_list_w/>
+wfdesc:hasWorkflowDefinition <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/Annotate_gene_list_w.wfbundle>.
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/Annotate_gene_list_w.wfbundle>
+pav:importedFrom <http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot/annotate_genes_biological_processes.t2flow> .
+
+## New workflow
+<http://ns.taverna.org.uk/2010/workflowBundle/f7b17c46-a5c5-428f-ad45-a0b0f4e85935/workflow/Annotate_gene_list_w/>
+wfdesc:hasWorkflowDefinition
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/Annotate_gene_list_w.wfbundle> .
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/Annotate_gene_list_w.wfbundle>
+pav:importedFrom
+<http://sandbox.wf4ever-project.org/rodl/ROs/data_interpretation-2-snapshot-1/annotate_genes_biological_processes_xpath_cpids.t2flow> .
