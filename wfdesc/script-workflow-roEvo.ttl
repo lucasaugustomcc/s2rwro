@@ -91,7 +91,9 @@ roevo:hasChange
 <change_specifications/changes-wf-2/changes/change-2>,
 <change_specifications/changes-wf-2/changes/change-3>,
 <change_specifications/changes-wf-2/changes/change-4>,
-<change_specifications/changes-wf-2/changes/change-5>
+<change_specifications/changes-wf-2/changes/change-5>,
+<change_specifications/changes-wf-2/changes/change-6>,
+<change_specifications/changes-wf-2/changes/change-7>
 .
 
 <change_specifications/changes-wf-1/changes/change-1> a roevo:Change , roevo:Modification ;
