@@ -12,47 +12,6 @@ PREFIX wf4ever: <http://purl.org/wf4ever/wf4ever#>
 PREFIX oa:      <http://www.w3.org/ns/oa#>
 PREFIX :        <http://w3id.org/s2rwro/md-setup#>
 
-select ?workflow ?process ?derivation where {
-?workflow a wfdesc:Workflow .
-?workflow wfdesc:hasSubProcess ?process .
-?process prov:wasDerivedFrom ?derivation .
-} LIMIT 100
-
-# question 1
-select ?workflow ?process ?derivation where {
-?workflow a wfdesc:Workflow .
-?workflow wfdesc:hasSubProcess ?process .
-?process prov:wasDerivedFrom ?derivation .
-} LIMIT 100
-
-
-PREFIX wfprov: <http://purl.org/wf4ever/wfprov#>
-PREFIX ore: <http://www.openarchives.org/ore/terms/>
-PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX wro: <http://purl.org/wf4ever/ro#>
-PREFIX roevo: <http://purl.org/wf4ever/roevo#>
-select distinct ?wro ?title
-where {?wro a wro:ResearchObject .
-?wro dct:title ?title .
-<http://example.com/gaf_1> wfprov:wasUsedBy ?processrun .
-?processrun wfprov:wasPartOfWorkflowRun ?wfrun .
-?wro ore:aggregates ?wfrun
-}
-
-#info about a WRO
-select distinct ?wro ?title ?snapshot ?changes ?change ?concept ?resource ?workflow
-where {
-?wro a wro:ResearchObject .
-?wro dcterms:title ?title .
-?snapshot roevo:isSnapshotOf ?wro .
-?snapshot roevo:wasChangedBy ?changes .
-?changes roevo:hasChange ?change .
-?change a ?concept .
-?change roevo:relatedResource ?resource .
-?workflow wfdesc:hasWorkflowDefinition ?resource .
-}
-
-
 #Question 1
 select distinct ?workflow ?source ?process ?dprocess ?input ?dinput ?output ?doutput ?datalink ?ddatalink
 where { 
