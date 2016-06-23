@@ -27,15 +27,54 @@ where {
 ?datalink prov:wasDerivedFrom ?ddatalink .
 }
 
-#Question 2
-select distinct ?wro ?title ?snapshot ?changes ?change ?concept ?resource ?workflow
-where {
-?wro a wro:ResearchObject .
-?wro dcterms:title ?title .
-?snapshot roevo:isSnapshotOf ?wro .
-?snapshot roevo:wasChangedBy ?changes .
-?changes roevo:hasChange ?change .
+# Question 2
+# Retrieving differences between two versions of an executable Workflow (i.e. tracking evolution of workflows: we1, we2)
+select distinct ?concept ?resource
+where { 
+?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> .
+?changeSpec roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-3/workflow/refined-workflow.t2flow> .
+?changeSpec roevo:hasChange ?change .
 ?change a ?concept .
 ?change roevo:relatedResource ?resource .
-?workflow wfdesc:hasWorkflowDefinition ?resource .
+}
+
+# Question 3
+# Retrieving differences between two versions of a Script (i.e. tracking evolution of scripts)
+
+select distinct ?concept ?resource
+where { 
+?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/workflow/build.sh> .
+?changeSpec roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/build.sh> .
+?changeSpec roevo:hasChange ?change .
+?change a ?concept .
+?change roevo:relatedResource ?resource .
+}
+
+# Question 4
+# Retrieving differences of lineage information between a script and different versions of its derived executable Workflows (i.e. script x we1, script x we2, ...)
+
+# script x we1
+select distinct ?concept ?resource
+where { 
+?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/workflow/build.sh> .
+?changeSpec roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> .
+?changeSpec roevo:hasChange ?change .
+?change a ?concept .
+?change roevo:relatedResource ?resource .
+}
+
+# script x we2
+select distinct ?concept ?resource
+where { 
+	{
+		?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/workflow/build.sh> .
+		?changeSpec roevo:hasChange ?change .
+		?change a ?concept .
+		?change roevo:relatedResource ?resource .
+	} union {
+		?changeSpec roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-3/workflow/refined-workflow.t2flow> .
+		?changeSpec roevo:hasChange ?change .
+		?change a ?concept .
+		?change roevo:relatedResource ?resource .
+	}
 }
