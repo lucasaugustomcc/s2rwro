@@ -39,7 +39,7 @@
  	dcterms:title "topology file for ​the non-standard residue PCA"^^xsd:string;
 .
 
-<in/fixed_1_pdb>
+<out/fixed_1_pdb>
 	a wfdesc:Output, wfdesc:Input;
 	rdfs:label "fixed_1"^^xsd:string;
  	dcterms:title "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation​"^^xsd:string;

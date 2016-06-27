@@ -10,10 +10,23 @@ PREFIX wfdesc:  <http://purl.org/wf4ever/wfdesc#>
 PREFIX prov:    <http://www.w3.org/ns/prov#>
 PREFIX wf4ever: <http://purl.org/wf4ever/wf4ever#>
 PREFIX oa:      <http://www.w3.org/ns/oa#>
-PREFIX :        <http://w3id.org/s2rwro/md-setup#>
+
+# script 
+# wfdesc id: <http://w3id.org/s2rwro/md-setup/script/Setup_of_a_Molecular/>
+# ro id: <http://w3id.org/s2rwro/md-setup/script/build.sh>
+
+# executable workflow : 
+# wfdesc id: <http://ns.taverna.org.uk/2010/workflowBundle/32626c21-da0e-4aeb-ac93-8727122a1293/workflow/Setup_of_a_Molecular/>
+# ro id: <http://w3id.org/s2rwro/md-setup/workflow/executable-workflow.t2flow>
+
+# refined workflow: 
+# wfdesc id: <http://ns.taverna.org.uk/2010/workflowBundle/294eb3d2-a0f5-43ae-9da0-82b308a34429/workflow/Setup_of_a_Molecular/> 
+# ro id: <http://w3id.org/s2rwro/md-setup/workflow/refined-workflow.t2flow>
+
 
 # Question 1
 # Retrieving lineage information associating  workflow's structure to script's elements (i.e. input, outputs, activities and program blocks)
+# generic SPARQL query
 select distinct ?workflow ?source ?process ?dprocess ?input ?dinput ?output ?doutput ?datalink ?ddatalink
 where { 
 ?workflow prov:hadPrimarySource ?source .
@@ -27,8 +40,24 @@ where {
 ?datalink prov:wasDerivedFrom ?ddatalink .
 }
 
+# specific SPARQL query
+# to identify for a given workflow activity, e.g., "split", which block in the script corresponds to this activity.
+BASE <http://ns.taverna.org.uk/2010/workflowBundle/32626c21-da0e-4aeb-ac93-8727122a1293/workflow/Setup_of_a_Molecular/>
+
+select distinct ?source ?processor ?start ?end
+where { 
+<> prov:hadPrimarySource ?source .
+<processor/split/> prov:wasDerivedFrom ?processor .
+?processor prov:wasDerivedFrom ?code .
+?code oa:start ?start .
+?code oa:end ?end .
+}
+
 # Question 2
 # Retrieving differences between two versions of an executable Workflow (i.e. tracking evolution of workflows: we1, we2)
+
+# specific SPARQL query
+# to identify changes between the first executable workflow created ("executable-workflow.t2flow") and the workflow derived from it ("refined-workflow.t2flow").
 select distinct ?concept ?resource
 where { 
 ?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> .
@@ -41,6 +70,8 @@ where {
 # Question 3
 # Retrieving differences between two versions of a Script (i.e. tracking evolution of scripts)
 
+# specific SPARQL query
+# to identify changes between the version of the script file ("build.sh") in snapshot 1 and 2.
 select distinct ?concept ?resource
 where { 
 ?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/workflow/build.sh> .
@@ -53,17 +84,20 @@ where {
 # Question 4
 # Retrieving differences of lineage information between a script and different versions of its derived executable Workflows (i.e. script x we1, script x we2, ...)
 
-# script x we1
+# specific SPARQL query
+# to identify changes between the version of the script wfdesc file specification and the executable workflow.
+# question: here I consider the changes between versions of the wfdesc files, however these changes were specified as related to the specification files. Should we use the specification file or wfdesc files to define these differences in the RO evo?
+# script x we1 ("executable-workflow.t2flow")
 select distinct ?concept ?resource
 where { 
-?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/workflow/build.sh> .
+?changeSpec roevo:fromVersion <http://w3id.org/s2rwro/md-setup/snapshot-1/script/build.sh> .
 ?changeSpec roevo:toVersion <http://w3id.org/s2rwro/md-setup/snapshot-2/workflow/executable-workflow.t2flow> .
 ?changeSpec roevo:hasChange ?change .
 ?change a ?concept .
 ?change roevo:relatedResource ?resource .
 }
 
-# script x we2
+# script x we2 ("refined-workflow.t2flow")
 select distinct ?concept ?resource
 where { 
 	{
